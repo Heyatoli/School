@@ -8,7 +8,6 @@ namespace EntityMapping
     public class DataService : IDataService
 
     {
-        
 
         //1
         public Order GetOrder(int id)
@@ -154,7 +153,6 @@ namespace EntityMapping
 
 
         //6
-        //Works
         public Product GetProduct(int id)
         {
             using (var db = new NordWindContext())
@@ -182,7 +180,6 @@ namespace EntityMapping
         }
 
         //7
-        //Works
         public List<Product> GetProductByName(string sub)
         {
 
@@ -210,7 +207,6 @@ namespace EntityMapping
         }
 
         //8
-        //Works
         public List<Product> GetProductByCategory(int id)
         {
 
@@ -240,7 +236,6 @@ namespace EntityMapping
         }
 
         //9
-        //Works
         public Category GetCategory(int id)
         {
 

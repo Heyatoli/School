@@ -13,5 +13,15 @@ namespace EntityMapping
 
         List<Product> GetProductByName(string name);
 
+        List<object> GetCategories();
+
+        Category GetCategory(int id);
+
+        Category CreateCategory(string name, string description);
+
+        bool UpdateCategory(int id, string name, string description);
+
+        bool DeleteCategory(int id);
+
     }
 }

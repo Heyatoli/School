@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Net.Http;
 
 namespace WebService.Controllers
 {
@@ -24,32 +25,44 @@ namespace WebService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return null;
+            var categories = _dataService.GetCategories();
+            if (categories == null) return NotFound();
+            return Ok(categories);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProduct(int id)
+        public IActionResult GetCategories(int id)
         {
-            return null;
+            var categories = _dataService.GetCategory(id);
+            if (categories == null) return NotFound();
+            return Ok(categories);
         }
 
         [HttpPost]
 
-        public IActionResult Post()
+        public HttpStatusCode Post([FromBody] string value)
         {
-            return null;
+            Category c = JsonConvert.DeserializeObject<Category>(value);
+            Category categories = _dataService.CreateCategory(c.Name,c.Description);
+           // if (categories == null);
+            return HttpStatusCode.Created;
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int id, [FromBody] string value)
         {
-            return null;
+             //Category c = JsonConvert.DeserializeObject<Category>(value);
+             var categories = _dataService.UpdateCategory(-1, "12", "12");
+             if (!categories) return NotFound();
+             return Ok();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return null;
+            var categories = _dataService.DeleteCategory(id);
+            if (categories == false) return NotFound();
+            return Ok(categories);
         }
     }
 }

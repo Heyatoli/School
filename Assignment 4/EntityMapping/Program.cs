@@ -32,17 +32,15 @@ namespace EntityMapping
 
             //Console.WriteLine(products.Count());
 
-            var categorys = d.GetCategory(1);
+            //var categorys = d.GetCategory(1);
 
-            Console.WriteLine(categorys.Name);
-
-            //var categories = d.getCategories();
+            //Console.WriteLine(categorys.Name);
 
             //d.CreateCategory("Test", "Nope");
 
             //d.deleteCategory(13);
 
-            //d.updateCategory(12, "Nope", "Nope");
+            //var h = d.UpdateCategory(-1, "Nope", "Nope");
 
             using (var db = new NordWindContext())
             {
