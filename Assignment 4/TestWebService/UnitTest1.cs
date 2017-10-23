@@ -158,7 +158,8 @@ namespace TestWebService
             Assert.Equal(HttpStatusCode.OK, statusCode);
             Assert.Equal(12, products.Count);
             Assert.Equal("Chai", products.First()["name"]);
-            //Assert.Equal("Beverages", products.First()["categoryName"]); //This doesn't work, because product doesn't have a categoryName, but a Category.Name.
+            ////This doesn't work, because product doesn't have a categoryName, but a Category.Name.
+            //Assert.Equal("Beverages", products.First()["categoryName"]); 
             Assert.Equal("Lakkalikööri", products.Last()["name"]);
         }
 

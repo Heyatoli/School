@@ -13,7 +13,7 @@ namespace EntityMapping
 
         List<Product> GetProductByName(string name);
 
-        List<object> GetCategories();
+        List<Category> GetCategories();
 
         Category GetCategory(int id);
 

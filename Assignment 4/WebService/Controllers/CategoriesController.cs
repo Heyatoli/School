@@ -39,30 +39,29 @@ namespace WebService.Controllers
         }
 
         [HttpPost]
-
-        public HttpStatusCode Post([FromBody] string value)
+        //This doesn't work, we believe the problem is the return value, because the tests aren't able to read it.
+        public IActionResult Post([FromBody] Category value)
         {
-            Category c = JsonConvert.DeserializeObject<Category>(value);
-            Category categories = _dataService.CreateCategory(c.Name,c.Description);
-           // if (categories == null);
-            return HttpStatusCode.Created;
+           Category categories = _dataService.CreateCategory(value.Name,value.Description);
+           string Uri = Url.Link("/api/categories", new { id = categories.Id });
+           return Created(Uri,value);
         }
 
+
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Category value)
         {
-             //Category c = JsonConvert.DeserializeObject<Category>(value);
-             var categories = _dataService.UpdateCategory(-1, "12", "12");
+             var categories = _dataService.UpdateCategory(id, value.Name, value.Description);
              if (!categories) return NotFound();
              return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete([FromBody] Category value)
         {
-            var categories = _dataService.DeleteCategory(id);
+            var categories = _dataService.DeleteCategory(value.Id);
             if (categories == false) return NotFound();
-            return Ok(categories);
+            return Ok(value.Id);
         }
     }
 }

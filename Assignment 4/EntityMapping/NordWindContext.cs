@@ -25,9 +25,11 @@ namespace EntityMapping
         {
             base.OnModelCreating(modelBuilder);
 
+            //Ensures that the program knows of certain columns
             modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("categoryname");
             modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("productname");
 
+            //Make sure that the program knows that OrderDetails has a superkey with the two foreignkeys combined
             modelBuilder.Entity<OrderDetails>()
             .HasKey(o => new { o.OrderId, o.ProductId });
         }

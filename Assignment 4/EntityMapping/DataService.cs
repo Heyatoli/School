@@ -150,8 +150,6 @@ namespace EntityMapping
             }
         }
 
-
-
         //6
         public Product GetProduct(int id)
         {
@@ -264,31 +262,22 @@ namespace EntityMapping
             }
         }
 
-
-
-
-
-
         //10
-        public List<object> GetCategories()
+        public List<Category> GetCategories()
         {
 
             using (var db = new NordWindContext())
             {
-
                 var query =
                     from c in db.Categories
-                    select new { c.Id, c.Name, c.Description };
-
-                foreach (var item in query)
-                {
-                    Console.WriteLine(item);
-                }
-
-                return query.ToList<Object>();
-
+                    select new Category
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Description = c.Description
+                    };
+                return query.ToList();
             }
-
         }
 
         //11
