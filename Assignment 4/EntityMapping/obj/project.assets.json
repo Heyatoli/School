@@ -6849,7 +6849,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lukas\\.nuget\\packages\\": {},
+    "C:\\Users\\Rove\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -6858,17 +6858,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukas\\Desktop\\Assignment 4\\EntityMapping\\EntityMapping.csproj",
+      "projectUniqueName": "C:\\Users\\Rove\\Source\\Repos\\School\\Assignment 4\\EntityMapping\\EntityMapping.csproj",
       "projectName": "EntityMapping",
-      "projectPath": "C:\\Users\\lukas\\Desktop\\Assignment 4\\EntityMapping\\EntityMapping.csproj",
-      "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lukas\\Desktop\\Assignment 4\\EntityMapping\\obj\\",
+      "projectPath": "C:\\Users\\Rove\\Source\\Repos\\School\\Assignment 4\\EntityMapping\\EntityMapping.csproj",
+      "packagesPath": "C:\\Users\\Rove\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rove\\Source\\Repos\\School\\Assignment 4\\EntityMapping\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Rove\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

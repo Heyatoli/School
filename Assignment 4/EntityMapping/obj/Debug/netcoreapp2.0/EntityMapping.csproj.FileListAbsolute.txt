@@ -20,3 +20,14 @@ C:\Users\lukas\Desktop\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\Entity
 C:\Users\lukas\Desktop\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.AssemblyInfo.cs
 C:\Users\lukas\Desktop\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.dll
 C:\Users\lukas\Desktop\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.pdb
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\bin\Debug\netcoreapp2.0\EntityMapping.deps.json
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\bin\Debug\netcoreapp2.0\EntityMapping.runtimeconfig.json
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\bin\Debug\netcoreapp2.0\EntityMapping.runtimeconfig.dev.json
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\bin\Debug\netcoreapp2.0\EntityMapping.dll
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\bin\Debug\netcoreapp2.0\EntityMapping.pdb
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.csprojResolveAssemblyReference.cache
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.csproj.CoreCompileInputs.cache
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.AssemblyInfoInputs.cache
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.AssemblyInfo.cs
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.dll
+C:\Users\Rove\source\repos\School\Assignment 4\EntityMapping\obj\Debug\netcoreapp2.0\EntityMapping.pdb
