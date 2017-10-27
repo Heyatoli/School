@@ -6,7 +6,12 @@ namespace Subproject_2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //test here
+
+            DatasevicePost d = new DatasevicePost();
+
+            d.getPost();
+
         }
     }
 }
