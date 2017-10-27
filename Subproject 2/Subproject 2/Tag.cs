@@ -6,5 +6,8 @@ namespace Subproject_2
 {
     class Tag
     {
+        public int id { get; set; }
+
+        public string name { get; set; }
     }
 }
