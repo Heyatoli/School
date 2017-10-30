@@ -8,6 +8,11 @@ namespace Subproject_2
     class stackOverflowContext : DbContext 
     {
         public DbSet<Post> Posts { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Comment> Comment { get; set; }
+        public DbSet<History> History { get; set; }
+        public DbSet<Marking> Marking { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
