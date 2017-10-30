@@ -38,5 +38,7 @@ namespace Subproject_2
         public User user { get; set; }
 
         public List<Tag> tags { get; set; }
+
+        public List<Comment> comments { get; set; }
     }
 }

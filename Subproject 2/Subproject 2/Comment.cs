@@ -21,6 +21,6 @@ namespace Subproject_2
 
         public User user { get; set; }
 
-        public Post post { get; set; }
+        //public Post post { get; set; }
     }
 }
