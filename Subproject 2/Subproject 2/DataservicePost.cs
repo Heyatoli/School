@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Subproject_2
 {
-    class DatasevicePost : IDataServicePost
+    class DataservicePost : IDataServicePost
     {
         public void getPost()
         {

@@ -8,7 +8,7 @@ namespace Subproject_2
         {
             //test here
 
-            DatasevicePost d = new DatasevicePost();
+            DataservicePost d = new DataservicePost();
 
             d.getPost();
 
