@@ -6,5 +6,7 @@ namespace Subproject_2
 {
     interface IDataServiceUser
     {
+        
+
     }
 }

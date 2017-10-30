@@ -6,5 +6,6 @@ namespace Subproject_2
 {
     interface IDataServicePost
     {
+
     }
 }

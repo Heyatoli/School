@@ -23,6 +23,7 @@ namespace Subproject_2
 
             modelBuilder.Entity<Marking>()
                 .HasKey(o => new { o.userID, o.postId });
+            
         }
     }
 }
