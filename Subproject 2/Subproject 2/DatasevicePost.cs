@@ -7,8 +7,6 @@ namespace Subproject_2
 {
     class DatasevicePost : IDataServicePost
     {
-
-
         public void getPost()
         {
             using (var db = new stackOverflowContext())
@@ -26,7 +24,7 @@ namespace Subproject_2
                     Console.WriteLine(item.id);
                 }
 
-            }
+            } //test
 
             
         }
