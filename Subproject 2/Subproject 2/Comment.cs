@@ -19,6 +19,8 @@ namespace Subproject_2
         [Column("comment_create_date")]
         public DateTime creationDate { get; set; }
 
+        public int postId { get; set; }
+
         public User user { get; set; }
 
         //public Post post { get; set; }
