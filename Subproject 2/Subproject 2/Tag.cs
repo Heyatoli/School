@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    class Tag
+    public class Tag
     {
         public int id { get; set; }
 

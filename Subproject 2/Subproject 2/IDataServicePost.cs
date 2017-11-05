@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    interface IDataServicePost
+    public interface IDataServicePost
     {
         List<Post> getPost();
 

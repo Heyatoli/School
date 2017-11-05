@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    class User
+    public class User
     {
         [Column("user_id")]
         public int id { get; set; }

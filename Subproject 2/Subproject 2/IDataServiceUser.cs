@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    interface IDataServiceUser
+    public interface IDataServiceUser
     {
         List<User> getUser(int id);
         //done

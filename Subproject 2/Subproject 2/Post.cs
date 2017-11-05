@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    class Post
+    public class Post
     {
 
         [Column("posts_id")]

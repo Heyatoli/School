@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Subproject_2
 {
-    class Marking
+    public class Marking
     {
         [Key, Column("posts_id", Order = 0)]
         public int postId { get; set; }
