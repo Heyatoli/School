@@ -8,9 +8,9 @@ namespace Subproject_2
         {
             //test here
 
-            DataservicePost d = new DataservicePost();
+            DataserviceUser d = new DataserviceUser();
 
-            d.getPost();
+            d.getUsername();
 
         }
     }

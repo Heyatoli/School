@@ -6,25 +6,26 @@ namespace Subproject_2
 {
     interface IDataServiceUser
     {
-        List<User> getUser();
-
+        List<User> getUser(int id);
+        //done
         List<User> getUsername(string u);
-            //search for user, both whole name, and input contains part of name    
+            //done    
         
-        List<History> getHistory(int userid); 
+        List<History> getHistory(int id); 
             //show user history 
         
-        List<Marking> getFavourites(int userid);
+        List<Marking> getFavourites(int id);
             //show user marking 
         
         History createHistory(int userid, string search);
-
+        //done
         Marking createMarking(int userid, int postid, string note);
-
-        Marking updateMarking(int userid, int postid, string note);
-
+        //done
+        bool updateMarking(int userid, int postid, string note);
+        //done
         bool deleteHistory(int histId);
 
-        bool deleteFavourites(int markId);
+        bool deleteFavourites(int userid, int postid);
+        //done
     }
 }

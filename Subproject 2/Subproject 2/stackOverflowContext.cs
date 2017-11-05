@@ -8,7 +8,7 @@ namespace Subproject_2
     class stackOverflowContext : DbContext 
     {
         public DbSet<Post> Posts { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<History> History { get; set; }
         public DbSet<Marking> Marking { get; set; }
@@ -18,7 +18,7 @@ namespace Subproject_2
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseMySql(
-                "Server = localhost; Port = 3307; Database = mydb; Uid = root; Pwd = 1234;" //put your own UserID and Password here
+                "Server = localhost; Port = 3306; Database = mydb; Uid = root; Pwd = roedbeder;" //put your own UserID and Password here
                 );
         }
 
