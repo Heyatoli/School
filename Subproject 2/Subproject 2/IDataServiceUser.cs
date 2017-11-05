@@ -6,7 +6,7 @@ namespace Subproject_2
 {
     public interface IDataServiceUser
     {
-        List<User> getUser(int id);
+        List<User> getUser();
         //done
         List<User> getUsername(string u);
             //done    
