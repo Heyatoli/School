@@ -8,6 +8,7 @@ namespace Subproject_2
     class stackOverflowContext : DbContext 
     {
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Combination> Combinations { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<History> History { get; set; }
