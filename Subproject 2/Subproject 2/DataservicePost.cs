@@ -23,7 +23,7 @@ namespace Subproject_2
 
                 var query2 =
                     (from p in db.Posts
-                     where p.postid == postid
+                     where p.id == postid
                      select new Post
                      {
                          score = p.score,
@@ -32,7 +32,7 @@ namespace Subproject_2
                          comments = query1
                      });
 
-                return query2;
+                return query2.FirstOrDefault();
             }
         }
 
@@ -64,21 +64,23 @@ namespace Subproject_2
             using (var db = new stackOverflowContext())
             {
                 var query =
-                    (from t in db.Tags 
+                    (from t in db.Tags
                      join c in db.Combinations
-                     on t.id equals c.tags_id 
-                     where t.name == tag 
+                     on t.id equals c.tags_id
+                     join p in db.Posts
+                     on c.post_id equals p.id
+                     where t.name == tag
                      select new Post
                      {
-                         id = u.id,
-                         type = u.type,
-                         parent_id = u.parent_id,
-                         answer_id = u.answer_id,
-                         creationDate = u.creationDate,
-                         score = u.score,
-                         text = u.text,
-                         closedDate = u.closedDate,
-                         title = u.title
+                         id = p.id,
+                         type = p.type,
+                         parent_id = p.parent_id,
+                         answer_id = p.answer_id,
+                         creationDate = p.creationDate,
+                         score = p.score,
+                         text = p.text,
+                         closedDate = p.closedDate,
+                         title = p.title
                      }).ToList();
 
                 return query;
@@ -91,7 +93,7 @@ namespace Subproject_2
             {
                 var query =
                     (from u in db.Posts
-                     where u.postid == postuserid 
+                     where u.id == postuserid 
                      select new Post
                      {
                          type = u.type,
@@ -113,18 +115,19 @@ namespace Subproject_2
             using (var db = new stackOverflowContext())
             {
                 var query =
-                    (from u in db.Posts
-                     where u.postid == postuserid 
+                    (from p in db.Posts
+                     where p.title.Contains(postword) 
                      select new Post
                      {
-                         type = u.type,
-                         parent_id = u.parent_id,
-                         answer_id = u.answer_id,
-                         creationDate = u.creationDate,
-                         score = u.score,
-                         text = u.text,
-                         closedDate = u.closedDate,
-                         title = u.title
+                         id = p.id,
+                         type = p.type,
+                         parent_id = p.parent_id,
+                         answer_id = p.answer_id,
+                         creationDate = p.creationDate,
+                         score = p.score,
+                         text = p.text,
+                         closedDate = p.closedDate,
+                         title = p.title
                      }).ToList();
 
                 return query;
