@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Subproject_2
 {
-    class DataserviceUser : IDataServiceUser
+    public class DataserviceUser : IDataServiceUser
     {
         public History createHistory(int id, string search)
         {
@@ -24,8 +24,8 @@ namespace Subproject_2
                 Console.WriteLine("Succesfully created");
                 return query;
             }
-            throw new NotImplementedException();
         }
+
 
         public Marking createMarking(int userid, int postid, string note)
         {
@@ -44,8 +44,8 @@ namespace Subproject_2
                 return query;
 
             }
-            throw new NotImplementedException();
         }
+        
 
         public bool deleteFavourites(int userid, int postid)
         {
@@ -72,8 +72,8 @@ namespace Subproject_2
                     throw;
                 }
             }
-            throw new NotImplementedException();
         }
+        //DOOOONE
 
         public bool deleteHistory(int id)
         {
@@ -101,9 +101,8 @@ namespace Subproject_2
 
 
             }
-
-            throw new NotImplementedException();
         }
+        //DOOOONE
 
         public List<Marking> getFavourites(int id)
         {
@@ -120,8 +119,8 @@ namespace Subproject_2
                      }).ToList();
                 return q;
             }
-                throw new NotImplementedException();
         }
+        //DOOOONE
 
         public List<History> getHistory(int id)
         {
@@ -139,34 +138,35 @@ namespace Subproject_2
                      }).ToList();
                 return q;
             }
-                throw new NotImplementedException();
         }
+        //DOOOONE
 
-        public List<User> getUser(int id)
+        public List<User> getUser()
         {
             using (var db = new stackOverflowContext())
             {
                 var q =
                     (from u in db.User
-                     where u.id == id
+                     //where u.id == id
                      select new User
                      {
                         age = u.age,
                         creationDate = u.creationDate,
                         location = u.location,
                         name = u.name
-                     });
+                     }).ToList();
 
                 Console.WriteLine(q.FirstOrDefault());
+                return q;
             }
-                throw new NotImplementedException();
         }
+        //DOOOONE
 
         public List<User> getUsername(string s)
         {
             using (var db = new stackOverflowContext())
             {
-                var q =
+                var users =
                     (from n in db.User
                      where n.name.Contains(s)
                      select new User
@@ -176,10 +176,8 @@ namespace Subproject_2
                          location = n.location,
                          name = n.name
                      }).ToList();
-                return q;      
-               
+                return users;      
             }
-                throw new NotImplementedException();
         }
 
         public bool updateMarking(int userid, int postid, string note)
@@ -209,8 +207,6 @@ namespace Subproject_2
                 }
 
             }
-
-            throw new NotImplementedException();
         }
     }
 }

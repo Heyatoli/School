@@ -77,7 +77,7 @@ namespace StackoverflowWebservice.Controllers
         {
             var marking = _dataService.createMarking(value.userID, value.postId, value.note);
             var url = Url.Link("markings", new { postId = value.postId, userId = value.userID });
-            return Created(url, value);
+            //return Created(url, value);
             return Json(JsonConvert.SerializeObject(value));
         }
 
@@ -85,7 +85,7 @@ namespace StackoverflowWebservice.Controllers
         public IActionResult PutMarkings([FromBody] Marking value)
         {
             var update = _dataService.updateMarking(value.userID, value.postId, value.note);
-            if (update == null) return NotFound();
+            if (update == false) return NotFound();
             return Ok();
         }
     }
