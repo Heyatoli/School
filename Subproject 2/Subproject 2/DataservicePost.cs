@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Subproject_2
 {
-    class DataservicePost : IDataServicePost
+    public class DataservicePost : IDataServicePost
     {
         public Post getCommments(int postid)
         {
             using (var db = new stackOverflowContext())
             {
                 var query1 =
-                    (from c in db.Comment 
+                    (from c in db.Comments
                     where c.postId == postid
                     select new Comment
                     {
@@ -31,6 +31,13 @@ namespace Subproject_2
                          creationDate = p.creationDate,
                          comments = query1
                      });
+
+                for (int i = 0; i < query2.FirstOrDefault().comments.Count(); i++)
+                {
+                    Console.WriteLine(query2.FirstOrDefault().comments.ElementAt(i).text);
+                }
+                    
+                
 
                 return query2.FirstOrDefault();
             }

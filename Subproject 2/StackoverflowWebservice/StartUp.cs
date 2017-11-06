@@ -27,7 +27,7 @@ namespace StackoverflowWebservice
         {
             services.AddMvc();
 
-            services.AddSingleton<IDataServicePosts, DatasevicePost>();
+            services.AddSingleton<IDataServicePost, DataservicePost>();
             services.AddSingleton<IDataServiceUser, DataserviceUser>();
         }
 

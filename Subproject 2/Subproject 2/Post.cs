@@ -15,22 +15,22 @@ namespace Subproject_2
         public int type { get; set; }
 
         [Column("parent_id")]
-        public int parent_id { get; set; }
+        public int? parent_id { get; set; }
 
         [Column("accepted_answer_id")]
-        public int answer_id { get; set; }
+        public int? answer_id { get; set; }
 
         [Column("post_creation_date")]
-        public DateTime creationDate { get; set; }
+        public DateTime? creationDate { get; set; }
 
         [Column("post_score")]
-        public int score { get; set; }
+        public int? score { get; set; }
 
         [Column("post_text")]
         public string text { get; set; }
 
         [Column("post_closed_date")]
-        public DateTime closedDate { get; set; }
+        public DateTime? closedDate { get; set; }
 
         [Column("post_title")]
         public string title { get; set; }

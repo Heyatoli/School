@@ -8,9 +8,11 @@ namespace Subproject_2
         {
             //test here
 
-            DataserviceUser d = new DataserviceUser();
+            //DataserviceUser d = new DataserviceUser();
+            DataservicePost d = new DataservicePost();
 
-            d.getUsername();
+            var test = d.getPostWord("what");
+            Console.WriteLine(test);
 
         }
     }
