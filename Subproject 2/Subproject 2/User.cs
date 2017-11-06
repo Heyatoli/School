@@ -20,7 +20,7 @@ namespace Subproject_2
         public string location { get; set; }
 
         [Column("user_age")]
-        public int age { get; set; }
+        public int? age { get; set; }
 
         public List<Marking> marks { get; set; }
 

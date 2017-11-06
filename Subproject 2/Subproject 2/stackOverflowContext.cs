@@ -29,6 +29,8 @@ namespace Subproject_2
 
             modelBuilder.Entity<Marking>()
                 .HasKey(o => new { o.userID, o.postId });
+            modelBuilder.Entity<Combination>()
+                .HasKey(o => new { o.post_id, o.tags_id });
 
         }
     }
