@@ -11,7 +11,7 @@ namespace Subproject_2
             //DataserviceUser d = new DataserviceUser();
             DataservicePost d = new DataservicePost();
 
-            var test = d.getPostWord("what");
+            var test = d.getPostByTag("java");
             Console.WriteLine(test);
 
         }

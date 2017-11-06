@@ -90,6 +90,8 @@ namespace Subproject_2
                          title = p.title
                      }).ToList();
 
+                Console.WriteLine(query.FirstOrDefault().title);
+
                 return query;
             }
         }
