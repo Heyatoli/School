@@ -2,11 +2,41 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Subproject_2
 {
     public class DataserviceUser : IDataServiceUser
     {
+
+        public void test()
+        {
+            using (var db = new stackOverflowContext())
+            {
+
+                var conn = (MySqlConnection)db.Database.GetDbConnection();
+                conn.Open();
+                var cmd = new MySqlCommand();
+                cmd.Connection = conn;
+
+                cmd.Parameters.Add("@1", DbType.Int32);
+                
+                cmd.Parameters["@1"].Value = 1;
+
+
+                cmd.CommandText = "call user_top_ten(@1)";
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Console.WriteLine((reader.GetInt32((int) 0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3)));
+                }
+            }
+        }
+
         public History createHistory(int id, string search)
         {
 
@@ -25,7 +55,7 @@ namespace Subproject_2
                 return query;
             }
         }
-
+        //Almost done
 
         public Marking createMarking(int userid, int postid, string note)
         {
@@ -45,7 +75,7 @@ namespace Subproject_2
 
             }
         }
-        
+        //Almost done
 
         public bool deleteFavourites(int userid, int postid)
         {
@@ -208,5 +238,6 @@ namespace Subproject_2
 
             }
         }
+        //DOOOONE
     }
 }
