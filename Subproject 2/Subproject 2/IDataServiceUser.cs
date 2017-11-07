@@ -8,7 +8,7 @@ namespace Subproject_2
     {
         List<User> getUser();
         //done
-        List<User> getUsername(string u);
+        List<User> getUsername(string name);
             //done    
         
         List<History> getHistory(int id); 

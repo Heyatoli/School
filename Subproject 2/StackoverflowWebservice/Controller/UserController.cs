@@ -30,7 +30,7 @@ namespace StackoverflowWebservice.Controllers
             return Ok(JsonConvert.SerializeObject(users));
         }
 
-        [HttpGet("name")]
+        [HttpGet("{name}")]
         public IActionResult GetUsersByName(string name)
         {
             var users = _dataService.getUsername(name);
