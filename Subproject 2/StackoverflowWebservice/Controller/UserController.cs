@@ -15,6 +15,8 @@ namespace StackoverflowWebservice.Controllers
     public class UserController : Controller
     {
 
+        private const int standardPageSize = 15;
+
         private IDataServiceUser _dataService;
 
         public UserController(IDataServiceUser dataService)
@@ -22,12 +24,24 @@ namespace StackoverflowWebservice.Controllers
             _dataService = dataService;
         }
 
-        [HttpGet]
-        public IActionResult GetUsers()
+        [HttpGet(Name = nameof(GetUsers))]
+        public IActionResult GetUsers(int page = 0, int pageSize = standardPageSize)
         {
-            var users = _dataService.getUser();
+            var totalUsers = _dataService.getUserAmount();
+            var totalPages = GetTotalPages(pageSize, totalUsers);
+            var users = _dataService.getUser(page, pageSize);
             if (users == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(users));
+            var result = new
+            {
+                Total = totalUsers,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetUsers), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUsers), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUsers), page, pageSize),
+                Data = users
+            };
+            return Ok(result);
         }
 
         [HttpGet("{name}")]
@@ -87,6 +101,20 @@ namespace StackoverflowWebservice.Controllers
             var update = _dataService.updateMarking(value.userID, value.postId, value.note);
             if (update == false) return NotFound();
             return Ok();
+        }
+
+        private static int GetTotalPages(int pageSize, int total)
+        {
+            return (int)Math.Ceiling(total / (double)pageSize);
+        }
+
+        private string Link(string route, int page, int pageSize, int pageInc = 0, Func<bool> f = null)
+        {
+            if (f == null) return Url.Link(route, new { page, pageSize });
+
+            return f()
+                ? Url.Link(route, new { page = page + pageInc, pageSize })
+                : null;
         }
     }
 }

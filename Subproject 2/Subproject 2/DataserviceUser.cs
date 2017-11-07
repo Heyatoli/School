@@ -171,7 +171,23 @@ namespace Subproject_2
         }
         //DOOOONE
 
-        public List<User> getUser()
+
+        public int getUserAmount()
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var amount =
+                    (from u in db.User
+                     select new User
+                     {
+                         id = u.id
+                     }).ToList();
+
+                return amount.Count();
+            }
+        }
+
+        public List<User> getUser(int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -184,7 +200,10 @@ namespace Subproject_2
                         creationDate = u.creationDate,
                         location = u.location,
                         name = u.name
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page*pageSize)
+                     .Take(pageSize)
+                     .ToList();
 
                 Console.WriteLine(q.FirstOrDefault());
                 return q;
