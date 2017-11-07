@@ -25,7 +25,7 @@ namespace Subproject_2
                 return query;
             }
         }
-
+        //Almost done
 
         public Marking createMarking(int userid, int postid, string note)
         {
@@ -45,7 +45,7 @@ namespace Subproject_2
 
             }
         }
-        
+        //Almost done
 
         public bool deleteFavourites(int userid, int postid)
         {
@@ -162,13 +162,13 @@ namespace Subproject_2
         }
         //DOOOONE
 
-        public List<User> getUsername(string s)
+        public List<User> getUsername(string name)
         {
             using (var db = new stackOverflowContext())
             {
                 var users =
                     (from n in db.User
-                     where n.name.Contains(s)
+                     where n.name.Contains(name)
                      select new User
                      {
                          age = n.age,
@@ -176,9 +176,10 @@ namespace Subproject_2
                          location = n.location,
                          name = n.name
                      }).ToList();
-                return users;      
+                return users;
             }
         }
+        //DOOOONE
 
         public bool updateMarking(int userid, int postid, string note)
         {
@@ -208,5 +209,6 @@ namespace Subproject_2
 
             }
         }
+        //Almost done
     }
 }
