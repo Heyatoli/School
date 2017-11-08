@@ -7,14 +7,22 @@ namespace Subproject_2
     public interface IDataServiceUser
     {
 
+        int userAmount();
+
         List<User> getUser(int page, int pageSize);
         //done
+
+        int userNameAmount(string name);
+        
         List<User> getUsername(string name, int page, int pageSize);
-            //done    
+        //done  
+
+        int historyAmount(int id);
         
-        List<History> getHistory(int id, int page, int pageSize); 
-            //show user history 
-        
+        List<History> getHistory(int id, int page, int pageSize);
+        //show user history 
+
+        int markingAmount(int id);
         List<Marking> getFavourites(int id, int page, int pageSize);
             //show user marking 
         

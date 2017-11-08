@@ -134,6 +134,22 @@ namespace Subproject_2
         }
         //DOOOONE
 
+        public int markingAmount(int userid)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query = (
+                    from m in db.Marking
+                    where m.userID == userid
+                    select new Marking
+                    {
+                     postId = m.postId
+                    }).ToList();
+
+                return query.Count();
+            }
+        }
+        
         public List<Marking> getFavourites(int id, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
@@ -146,12 +162,30 @@ namespace Subproject_2
                          postId = m.postId,
                          userID = m.userID,
                          note = m.note
-                     }).ToList();
+                     }).OrderBy(u => u.userID)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
                 return q;
             }
         }
         //DOOOONE
 
+        public int historyAmount(int userid)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query = (
+                    from h in db.History
+                    where h.userId == userid
+                    select new History
+                    {
+                        userId = h.userId
+                    }).ToList();
+
+                return query.Count();
+            }
+        }
 
         public List<History> getHistory(int id, int page, int pageSize)
         {
@@ -166,11 +200,30 @@ namespace Subproject_2
                          id = h.id,
                          userId = h.userId,
                          searchWord = h.searchWord
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
+
                 return q;
             }
         }
         //DOOOONE
+
+        public int userAmount()
+            {
+                using (var db = new stackOverflowContext())
+                {
+                    var query = (
+                        from u in db.User
+                        select new User
+                        {
+                            id = u.id
+                        }).ToList();
+
+                    return query.Count();
+                }
+            }
 
         public List<User> getUser(int page, int pageSize)
         {
@@ -195,6 +248,22 @@ namespace Subproject_2
         }
         //DOOOONE
 
+        public int userNameAmount(string s)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query = (
+                    from u in db.User
+                    where u.name.Contains(s)
+                    select new User
+                    {
+                        name = u.name
+                    }).ToList();
+
+                return query.Count();
+            }
+        }
+
         public List<User> getUsername(string s, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
@@ -208,7 +277,10 @@ namespace Subproject_2
                          creationDate = n.creationDate,
                          location = n.location,
                          name = n.name
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
                 return users;      
             }
         }
