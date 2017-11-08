@@ -7,7 +7,7 @@ namespace Subproject_2
 {
     public class DataservicePost : IDataServicePost
     {
-        public Post getCommments(int postid)
+        public Post getCommments(int postid, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -43,7 +43,7 @@ namespace Subproject_2
             }
         }
 
-        public List<Post> getPost()
+        public List<Post> getPost(int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -60,13 +60,16 @@ namespace Subproject_2
                          text = u.text,
                          closedDate = u.closedDate,
                          title = u.title
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
 
                 return query;
             }
         }
 
-        public List<Post> getPostByTag(string tag)
+        public List<Post> getPostByTag(string tag, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -88,7 +91,10 @@ namespace Subproject_2
                          text = p.text,
                          closedDate = p.closedDate,
                          title = p.title
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
 
                 Console.WriteLine(query.FirstOrDefault().title);
 
@@ -96,7 +102,7 @@ namespace Subproject_2
             }
         }
 
-        public List<Post> getPostByUser(int postuserid)
+        public List<Post> getPostByUser(int postuserid, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -113,13 +119,16 @@ namespace Subproject_2
                          text = u.text,
                          closedDate = u.closedDate,
                          title = u.title
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
 
                 return query;
             }
         }
 
-        public List<Post> getPostWord(string postword)
+        public List<Post> getPostWord(string postword, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -137,7 +146,10 @@ namespace Subproject_2
                          text = p.text,
                          closedDate = p.closedDate,
                          title = p.title
-                     }).ToList();
+                     }).OrderBy(u => u.id)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                     .ToList();
 
                 return query;
             }
