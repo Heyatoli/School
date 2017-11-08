@@ -123,7 +123,7 @@ namespace StackoverflowWebservice.Controllers
 
         }
 
-        [HttpPost("history", Name =nameof(PostUserHistory))]
+        [HttpPost("history", Name = nameof(PostUserHistory))]
         public IActionResult PostUserHistory([FromBody] History value)
         {
             var history = _dataService.createHistory(value.userId, value.searchWord);
@@ -134,7 +134,6 @@ namespace StackoverflowWebservice.Controllers
                 User = url.ToString(),
             };
             return Created(url, result);
-            //return Json(JsonConvert.SerializeObject(value));
         }
 
         [HttpPost("markings", Name =nameof(PostUserMarking))]
