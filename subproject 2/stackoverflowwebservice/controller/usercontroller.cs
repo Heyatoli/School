@@ -29,7 +29,7 @@ namespace StackoverflowWebservice.Controllers
         {
             
             var users = _dataService.getUser(page, pageSize);
-            var totalUsers = users.Count();
+            var totalUsers = _dataService.userAmount();
             var totalPages = GetTotalPages(pageSize, totalUsers);
             if (users == null) return NotFound();
             var result = new
@@ -49,7 +49,7 @@ namespace StackoverflowWebservice.Controllers
         public IActionResult GetUsersByName(string name, int page = 0, int pageSize = standardPageSize)
         {
             var users = _dataService.getUsername(name, page, pageSize);
-            var totalUsers = users.Count();
+            var totalUsers = _dataService.userNameAmount(name);
             var totalPages = GetTotalPages(pageSize, totalUsers);
             if (users == null) return NotFound();
             var result = new
@@ -57,9 +57,9 @@ namespace StackoverflowWebservice.Controllers
                 Total = totalUsers,
                 Pages = totalPages,
                 Page = page,
-                Prev = Link(nameof(GetUsers), page, pageSize, -1, () => page > 0),
-                Next = Link(nameof(GetUsers), page, pageSize, 1, () => page < totalPages - 1),
-                Url = Link(nameof(GetUsers), page, pageSize),
+                Prev = Link(nameof(GetUsersByName), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUsersByName), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUsersByName), page, pageSize),
                 Data = users
             };
             return Ok(result);
@@ -69,28 +69,40 @@ namespace StackoverflowWebservice.Controllers
         public IActionResult GetUserHistory(int userId, int page = 0, int pageSize = standardPageSize)
         {
             var history = _dataService.getHistory(userId, page, pageSize);
-            var totalUsers = history.Count();
-            var totalPages = GetTotalPages(pageSize, totalUsers);
+            var totalHistory = _dataService.historyAmount(userId);
+            var totalPages = GetTotalPages(pageSize, totalHistory);
             if (history == null) return NotFound();
             var result = new
             {
-                Total = totalUsers,
+                Total = totalHistory,
                 Pages = totalPages,
                 Page = page,
-                Prev = Link(nameof(GetUsers), page, pageSize, -1, () => page > 0),
-                Next = Link(nameof(GetUsers), page, pageSize, 1, () => page < totalPages - 1),
-                Url = Link(nameof(GetUsers), page, pageSize),
+                Prev = Link(nameof(GetUserHistory), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUserHistory), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUserHistory), page, pageSize),
                 Data = history
             };
-            return Ok(history);
+            return Ok(result);
         }
 
         [HttpGet("markings/{userId}", Name = nameof(GetUserMarkings))]
         public IActionResult GetUserMarkings(int userId, int page = 0, int pageSize = standardPageSize)
         {
             var markings = _dataService.getFavourites(userId, page, pageSize);
+            var totalMarkings = _dataService.markingAmount(userId);
+            var totalPages = GetTotalPages(pageSize, totalMarkings);
             if (markings == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(markings));
+            var result = new
+            {
+                Total = totalMarkings,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetUserHistory), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUserHistory), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUserHistory), page, pageSize),
+                Data = markings
+            };
+            return Ok(result);
         }
 
         [HttpDelete("history/{histId}")]
@@ -137,7 +149,6 @@ namespace StackoverflowWebservice.Controllers
                 Note = marking.note
             };
             return Created(url, result);
-            //return Json(JsonConvert.SerializeObject(value));
         }
 
         [HttpPut, Route("markings")]
