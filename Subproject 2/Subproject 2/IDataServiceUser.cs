@@ -6,17 +6,16 @@ namespace Subproject_2
 {
     public interface IDataServiceUser
     {
-        int getUserAmount();
 
         List<User> getUser(int page, int pageSize);
         //done
-        List<User> getUsername(string name);
+        List<User> getUsername(string name, int page, int pageSize);
             //done    
         
-        List<History> getHistory(int id); 
+        List<History> getHistory(int id, int page, int pageSize); 
             //show user history 
         
-        List<Marking> getFavourites(int id);
+        List<Marking> getFavourites(int id, int page, int pageSize);
             //show user marking 
         
         History createHistory(int userid, string search);

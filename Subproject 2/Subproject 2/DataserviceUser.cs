@@ -134,7 +134,7 @@ namespace Subproject_2
         }
         //DOOOONE
 
-        public List<Marking> getFavourites(int id)
+        public List<Marking> getFavourites(int id, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -152,7 +152,8 @@ namespace Subproject_2
         }
         //DOOOONE
 
-        public List<History> getHistory(int id)
+
+        public List<History> getHistory(int id, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -171,29 +172,12 @@ namespace Subproject_2
         }
         //DOOOONE
 
-
-        public int getUserAmount()
-        {
-            using (var db = new stackOverflowContext())
-            {
-                var amount =
-                    (from u in db.User
-                     select new User
-                     {
-                         id = u.id
-                     }).ToList();
-
-                return amount.Count();
-            }
-        }
-
         public List<User> getUser(int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
                 var q =
                     (from u in db.User
-                     //where u.id == id
                      select new User
                      {
                         age = u.age,
@@ -211,7 +195,7 @@ namespace Subproject_2
         }
         //DOOOONE
 
-        public List<User> getUsername(string s)
+        public List<User> getUsername(string s, int page, int pageSize)
         {
             using (var db = new stackOverflowContext())
             {
@@ -257,6 +241,7 @@ namespace Subproject_2
 
             }
         }
+
         //DOOOONE
     }
 }

@@ -27,9 +27,10 @@ namespace StackoverflowWebservice.Controllers
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = standardPageSize)
         {
-            var totalUsers = _dataService.getUserAmount();
-            var totalPages = GetTotalPages(pageSize, totalUsers);
+            
             var users = _dataService.getUser(page, pageSize);
+            var totalUsers = users.Count();
+            var totalPages = GetTotalPages(pageSize, totalUsers);
             if (users == null) return NotFound();
             var result = new
             {
@@ -44,31 +45,55 @@ namespace StackoverflowWebservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{name}")]
-        public IActionResult GetUsersByName(string name)
+        [HttpGet("{name}", Name = nameof(GetUsersByName))]
+        public IActionResult GetUsersByName(string name, int page = 0, int pageSize = standardPageSize)
         {
-            var users = _dataService.getUsername(name);
+            var users = _dataService.getUsername(name, page, pageSize);
+            var totalUsers = users.Count();
+            var totalPages = GetTotalPages(pageSize, totalUsers);
             if (users == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(users));
+            var result = new
+            {
+                Total = totalUsers,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetUsers), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUsers), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUsers), page, pageSize),
+                Data = users
+            };
+            return Ok(result);
         }
 
-        [HttpGet, Route("history/{userId}")]
-        public IActionResult GetUserHistory(int userId)
+        [HttpGet, Route("history/{userId}", Name = nameof(GetUserHistory))]
+        public IActionResult GetUserHistory(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var history = _dataService.getHistory(userId);
+            var history = _dataService.getHistory(userId, page, pageSize);
+            var totalUsers = history.Count();
+            var totalPages = GetTotalPages(pageSize, totalUsers);
             if (history == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(history));
+            var result = new
+            {
+                Total = totalUsers,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetUsers), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetUsers), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetUsers), page, pageSize),
+                Data = history
+            };
+            return Ok(history);
         }
 
-        [HttpGet, Route("markings/{userId}")]
-        public IActionResult GetUserMarkings(int userId)
+        [HttpGet("markings/{userId}", Name = nameof(GetUserMarkings))]
+        public IActionResult GetUserMarkings(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var markings = _dataService.getFavourites(userId);
+            var markings = _dataService.getFavourites(userId, page, pageSize);
             if (markings == null) return NotFound();
             return Ok(JsonConvert.SerializeObject(markings));
         }
 
-        [HttpDelete, Route("history/{histId}")]
+        [HttpDelete("history/{histId}")]
         public IActionResult DeleteUserHistory(int histId)
         {
             var delete = _dataService.deleteHistory(histId);
@@ -77,7 +102,7 @@ namespace StackoverflowWebservice.Controllers
 
         }
 
-        [HttpDelete, Route("markings/{postId}/{userId}")]
+        [HttpDelete("markings/{postId}/{userId}")]
         public IActionResult DeleteUserMarking(int postId, int userId)
         {
             var delete = _dataService.deleteFavourites(postId, userId);
@@ -86,13 +111,19 @@ namespace StackoverflowWebservice.Controllers
 
         }
 
-        [HttpPost, Route("markings")]
+        [HttpPost("markings", Name =nameof(PostUserMarking))]
         public IActionResult PostUserMarking([FromBody] Marking value)
         {
             var marking = _dataService.createMarking(value.userID, value.postId, value.note);
-            var url = Url.Link("markings", new { postId = value.postId, userId = value.userID });
-            //return Created(url, value);
-            return Json(JsonConvert.SerializeObject(value));
+            var url = Url.Link(nameof(GetUserMarkings), new { marking.userID});
+            var result = new
+            {
+                Post = "Bla bla",
+                User = url.ToString(),
+                Note = marking.note
+            };
+            return Created(url, result);
+            //return Json(JsonConvert.SerializeObject(value));
         }
 
         [HttpPut, Route("markings")]
