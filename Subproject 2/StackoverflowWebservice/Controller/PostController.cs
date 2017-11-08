@@ -14,6 +14,7 @@ namespace WebService.Controllers
     [Route("/api/posts")]
     public class PostController : Controller
     {
+        private const int standardPageSize = 15;
         private IDataServicePost _dataService;
 
         public PostController(IDataServicePost dataService)
@@ -21,44 +22,107 @@ namespace WebService.Controllers
             _dataService = dataService;
         }
 
-        [HttpGet]
-        public IActionResult GetPost()
+        [HttpGet(Name = nameof(GetPost))]
+        public IActionResult GetPost(int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPost();
+            var posts = _dataService.getPost(page, pageSize);
+            var totalPosts = _dataService.amountPost();
+            var totalPages = GetTotalPages(pageSize, totalPosts);
             if (posts == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(posts));
+            var result = new
+            {
+                Total = totalPosts,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetPost), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetPost), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetPost), page, pageSize),
+                Data = posts
+            };
+            return Ok(result);
         }
 
-        [HttpGet, Route("tag/{tagName}")]
-        public IActionResult GetPostByTag(string tagName)
+        [HttpGet("tag/{tagName}", Name = nameof(GetPostByTag))]
+        public IActionResult GetPostByTag(string tagName, int page = 0, int pageSize = standardPageSize)
         {
-            var post = _dataService.getPostByTag(tagName);
+            var post = _dataService.getPostByTag(tagName, page, pageSize);
+            var totalPosts = _dataService.amountPostByTag(tagName);
+            var totalPages = GetTotalPages(pageSize, totalPosts);
             if (post == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(post));
+            var result = new
+            {
+                Total = totalPosts,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetPost), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetPost), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetPost), page, pageSize),
+                Data = post
+            };
+            return Ok(result);
         }
 
-        [HttpGet, Route("comments/{postId}")]
-        public IActionResult GetCommentsByPost(int postId)
+        [HttpGet("comments/{postId}", Name = nameof(GetCommentsByPost))]
+        public IActionResult GetCommentsByPost(int postId, int page = 0, int pageSize = standardPageSize)
         {
-            var comments = _dataService.getCommments(postId);
+            var comments = _dataService.getCommments(postId, page, pageSize);
             if (comments == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(comments));
+            return Ok(comments);
         }
 
-        [HttpGet, Route("user/{userId}")]
-        public IActionResult GetPostsByUserId(int userId)
+        [HttpGet("user/{userId}", Name = nameof(GetPostsByUserId))]
+        public IActionResult GetPostsByUserId(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPostByUser(userId);
+            var posts = _dataService.getPostByUser(userId, page, pageSize);
+            var totalPosts = _dataService.amountPostByUser(userId);
+            var totalPages = GetTotalPages(pageSize, totalPosts);
             if (posts == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(posts));
+            var result = new
+            {
+                Total = totalPosts,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetPost), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetPost), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetPost), page, pageSize),
+                Data = posts
+            };
+            return Ok(result);
         }
 
-        [HttpGet, Route("title/{substring}")]
-        public IActionResult GetPostsByName(string substring)
+        [HttpGet("title/{substring}", Name = nameof(GetPostsByName))]
+        public IActionResult GetPostsByName(string substring, int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPostWord(substring);
+            var posts = _dataService.getPostWord(substring, page, pageSize);
+            var totalPosts = _dataService.amountPostWord(substring);
+            var totalPages = GetTotalPages(pageSize, totalPosts);
             if (posts == null) return NotFound();
-            return Ok(JsonConvert.SerializeObject(posts));
+            var result = new
+            {
+                Total = totalPosts,
+                Pages = totalPages,
+                Page = page,
+                Prev = Link(nameof(GetPost), page, pageSize, -1, () => page > 0),
+                Next = Link(nameof(GetPost), page, pageSize, 1, () => page < totalPages - 1),
+                Url = Link(nameof(GetPost), page, pageSize),
+                Data = posts
+            };
+            return Ok(result);
         }
+
+        private static int GetTotalPages(int pageSize, int total)
+        {
+            return (int)Math.Ceiling(total / (double)pageSize);
+        }
+
+        private string Link(string route, int page, int pageSize, int pageInc = 0, Func<bool> f = null)
+        {
+            if (f == null) return Url.Link(route, new { page, pageSize });
+
+            return f()
+                ? Url.Link(route, new { page = page + pageInc, pageSize })
+                : null;
+        }
+
     }
 }

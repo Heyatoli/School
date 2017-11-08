@@ -35,6 +35,7 @@ namespace Subproject_2
         [Column("post_title")]
         public string title { get; set; }
 
+        [ForeignKey("user_id")]
         public User user { get; set; }
 
         public List<Tag> tags { get; set; }

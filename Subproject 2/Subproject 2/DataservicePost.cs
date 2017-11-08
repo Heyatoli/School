@@ -32,13 +32,6 @@ namespace Subproject_2
                          comments = query1
                      });
 
-                for (int i = 0; i < query2.FirstOrDefault().comments.Count(); i++)
-                {
-                    Console.WriteLine(query2.FirstOrDefault().comments.ElementAt(i).text);
-                }
-                    
-                
-
                 return query2.FirstOrDefault();
             }
         }
@@ -108,7 +101,9 @@ namespace Subproject_2
             {
                 var query =
                     (from u in db.Posts
-                     where u.id == postuserid 
+                     join us in db.User
+                     on u.user.id equals us.id
+                     where us.id == postuserid 
                      select new Post
                      {
                          type = u.type,
@@ -123,6 +118,7 @@ namespace Subproject_2
                      .Skip(page * pageSize)
                      .Take(pageSize)
                      .ToList();
+                Console.WriteLine(query.Count());
 
                 return query;
             }
@@ -212,7 +208,9 @@ namespace Subproject_2
             {
                 var query =
                     (from u in db.Posts
-                     where u.id == postuserid
+                     join us in db.User
+                     on u.user.id equals us.id
+                     where us.id == postuserid
                      select new Post
                      {
                          id = u.id
