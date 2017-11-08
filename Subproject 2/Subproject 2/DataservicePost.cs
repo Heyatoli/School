@@ -143,7 +143,89 @@ namespace Subproject_2
             }
         }
 
-     }
+        public int amountPost()
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var q =
+                    (from p in db.Posts
+                     select new Post
+                     {
+                         id = p.id
+                     }).ToList();
+                return q.Count();
+            }
+        }
+
+        public int amountPostWord(string postWord)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query =
+                    (from p in db.Posts
+                     where p.title.Contains(postWord)
+                     select new Post
+                     {
+                         id = p.id,
+
+                     }).ToList();
+
+                return query.Count();
+            }
+        }
+
+        public int amountPostByTag(string tag)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query =
+                    (from t in db.Tags
+                     join c in db.Combinations
+                     on t.id equals c.tags_id
+                     join p in db.Posts
+                     on c.post_id equals p.id
+                     where t.name == tag
+                     select new Post
+                     {
+                         id = p.id
+                     }).ToList();
+
+                return query.Count();
+            }
+        }
+
+        public int amountPostByUser(int postuserid)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var query =
+                    (from u in db.Posts
+                     where u.id == postuserid
+                     select new Post
+                     {
+                         id = u.id
+                     }).ToList();
+
+                return query.Count();
+            }
+        }
+
+        public int amountComments(int postid)
+        {
+            using (var db = new stackOverflowContext())
+            {
+                var q =
+                    (from c in db.Comments
+                     where c.postId == postid
+                     select new Post
+                     {
+                         score = c.score
+                     }).ToList();
+
+                return q.Count();
+            }
+        }
+    }
 }
 
 

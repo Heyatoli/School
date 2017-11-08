@@ -19,5 +19,15 @@ namespace Subproject_2
             //list posts by user
 
         Post getCommments(int postid);
+
+        int amountPost();
+
+        int amountPostWord(string postWord);
+
+        int amountPostByTag(string tag);
+
+        int amountPostByUser(int postuserid);
+
+        int amountComments(int postid);
     }       
 }
