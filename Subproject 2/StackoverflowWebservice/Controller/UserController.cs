@@ -145,26 +145,25 @@ namespace StackoverflowWebservice.Controllers
             var url = Url.Link(nameof(GetUserHistory), new { history.userId });
             var result = new
             {
-                Search = history.searchWord,
+                Search = "localhost:5001/api/posts/title/" + history.searchWord,
                 User = url.ToString(),
             };
             return Created(url, result);
         }
 
-        [HttpPost("markings", Name =nameof(PostUserMarking))]
+        [HttpPost("markings", Name = nameof(PostUserMarking))]
         public IActionResult PostUserMarking([FromBody] Marking value)
         {
             var marking = _dataService.createMarking(value.userID, value.postId, value.note);
-            var url = Url.Link(nameof(GetUserMarkings), new { marking.userID});
+            var url = Url.Link(nameof(GetUserMarkings), new { marking.userID });
             var result = new
             {
-                Post = "Bla bla",
+                Post = "localhost:5001/api/posts",
                 User = url.ToString(),
                 Note = marking.note
             };
             return Created(url, result);
         }
-
         [HttpPut, Route("markings")]
         public IActionResult PutMarkings([FromBody] Marking value)
         {
