@@ -25,9 +25,13 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetPost))]
         public IActionResult GetPost(int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPost(page, pageSize);
             var totalPosts = _dataService.amountPost();
             var totalPages = GetTotalPages(pageSize, totalPosts);
+            if (page > totalPages-1)
+            {
+                page = 0;
+            }
+            var posts = _dataService.getPost(page, pageSize);
             if (posts == null) return NotFound();
             var result = new
             {
@@ -45,9 +49,13 @@ namespace WebService.Controllers
         [HttpGet("tag/{tagName}", Name = nameof(GetPostByTag))]
         public IActionResult GetPostByTag(string tagName, int page = 0, int pageSize = standardPageSize)
         {
-            var post = _dataService.getPostByTag(tagName, page, pageSize);
             var totalPosts = _dataService.amountPostByTag(tagName);
             var totalPages = GetTotalPages(pageSize, totalPosts);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var post = _dataService.getPostByTag(tagName, page, pageSize);
             if (post == null) return NotFound();
             var result = new
             {
@@ -73,9 +81,13 @@ namespace WebService.Controllers
         [HttpGet("user/{userId}", Name = nameof(GetPostsByUserId))]
         public IActionResult GetPostsByUserId(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPostByUser(userId, page, pageSize);
             var totalPosts = _dataService.amountPostByUser(userId);
             var totalPages = GetTotalPages(pageSize, totalPosts);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var posts = _dataService.getPostByUser(userId, page, pageSize);
             if (posts == null) return NotFound();
             var result = new
             {
@@ -93,9 +105,13 @@ namespace WebService.Controllers
         [HttpGet("title/{substring}", Name = nameof(GetPostsByName))]
         public IActionResult GetPostsByName(string substring, int page = 0, int pageSize = standardPageSize)
         {
-            var posts = _dataService.getPostWord(substring, page, pageSize);
             var totalPosts = _dataService.amountPostWord(substring);
             var totalPages = GetTotalPages(pageSize, totalPosts);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var posts = _dataService.getPostWord(substring, page, pageSize);
             if (posts == null) return NotFound();
             var result = new
             {

@@ -27,10 +27,13 @@ namespace StackoverflowWebservice.Controllers
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = standardPageSize)
         {
-            
-            var users = _dataService.getUser(page, pageSize);
             var totalUsers = _dataService.userAmount();
             var totalPages = GetTotalPages(pageSize, totalUsers);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var users = _dataService.getUser(page, pageSize);
             if (users == null) return NotFound();
             var result = new
             {
@@ -48,9 +51,13 @@ namespace StackoverflowWebservice.Controllers
         [HttpGet("{name}", Name = nameof(GetUsersByName))]
         public IActionResult GetUsersByName(string name, int page = 0, int pageSize = standardPageSize)
         {
-            var users = _dataService.getUsername(name, page, pageSize);
             var totalUsers = _dataService.userNameAmount(name);
             var totalPages = GetTotalPages(pageSize, totalUsers);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var users = _dataService.getUsername(name, page, pageSize);
             if (users == null) return NotFound();
             var result = new
             {
@@ -68,9 +75,13 @@ namespace StackoverflowWebservice.Controllers
         [HttpGet, Route("history/{userId}", Name = nameof(GetUserHistory))]
         public IActionResult GetUserHistory(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var history = _dataService.getHistory(userId, page, pageSize);
             var totalHistory = _dataService.historyAmount(userId);
             var totalPages = GetTotalPages(pageSize, totalHistory);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var history = _dataService.getHistory(userId, page, pageSize);
             if (history == null) return NotFound();
             var result = new
             {
@@ -88,9 +99,13 @@ namespace StackoverflowWebservice.Controllers
         [HttpGet("markings/{userId}", Name = nameof(GetUserMarkings))]
         public IActionResult GetUserMarkings(int userId, int page = 0, int pageSize = standardPageSize)
         {
-            var markings = _dataService.getFavourites(userId, page, pageSize);
             var totalMarkings = _dataService.markingAmount(userId);
             var totalPages = GetTotalPages(pageSize, totalMarkings);
+            if (page > totalPages - 1)
+            {
+                page = 0;
+            }
+            var markings = _dataService.getFavourites(userId, page, pageSize);
             if (markings == null) return NotFound();
             var result = new
             {
