@@ -6,12 +6,7 @@ namespace Subproject_2
     {
         static void Main(string[] args)
         {
-            //test here
-
-            //DataserviceUser d = new DataserviceUser();
-            DataservicePost d = new DataservicePost();
-
-            d.Select_post_bywordandtag("What", "c++");
+          
 
         }
     }
