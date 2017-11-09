@@ -11,7 +11,7 @@ namespace Subproject_2
             //DataserviceUser d = new DataserviceUser();
             DataservicePost d = new DataservicePost();
 
-            d.getPostByUser(13,0,15);
+            d.Select_post_bywordandtag("What", "c++");
 
         }
     }
