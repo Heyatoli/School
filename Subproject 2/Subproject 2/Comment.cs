@@ -22,8 +22,8 @@ namespace Subproject_2
         [Column("posts_id")]
         public int postId { get; set; }
 
+        [ForeignKey("user_id")]
         public User user { get; set; }
 
-        //public Post post { get; set; }
     }
 }
