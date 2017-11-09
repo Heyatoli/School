@@ -72,7 +72,7 @@ namespace StackoverflowWebservice.Controllers
             return Ok(result);
         }
 
-        [HttpGet, Route("history/{userId}", Name = nameof(GetUserHistory))]
+        [HttpGet("history/{userId}", Name = nameof(GetUserHistory))]
         public IActionResult GetUserHistory(int userId, int page = 0, int pageSize = standardPageSize)
         {
             var totalHistory = _dataService.historyAmount(userId);
@@ -164,7 +164,7 @@ namespace StackoverflowWebservice.Controllers
             };
             return Created(url, result);
         }
-        [HttpPut, Route("markings")]
+        [HttpPut("markings")]
         public IActionResult PutMarkings([FromBody] Marking value)
         {
             var update = _dataService.updateMarking(value.userID, value.postId, value.note);
