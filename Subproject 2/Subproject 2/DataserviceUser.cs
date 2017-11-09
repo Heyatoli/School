@@ -103,7 +103,6 @@ namespace Subproject_2
 
             }
         }
-        //DOOOONE
 
         public int markingAmount(int userid)
         {
@@ -140,7 +139,6 @@ namespace Subproject_2
                 return q;
             }
         }
-        //DOOOONE
 
         public int historyAmount(int userid)
         {
@@ -179,7 +177,6 @@ namespace Subproject_2
                 return q;
             }
         }
-        //DOOOONE
 
         public int userAmount()
             {
@@ -217,7 +214,6 @@ namespace Subproject_2
                 return q;
             }
         }
-        //DOOOONE
 
         public int userNameAmount(string s)
         {
@@ -285,6 +281,5 @@ namespace Subproject_2
             }
         }
 
-        //DOOOONE
     }
 }
